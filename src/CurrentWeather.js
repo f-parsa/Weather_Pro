@@ -25,7 +25,8 @@ export default function CurrentWeather() {
     feelsLike: response.data.main.feels_like,
     sunrise: response.data.sys.subrise,
     sunset: response.data.sys.sunset,
-    currentDate: new Date(response.data.dt * 1000)
+    currentDate: new Date(response.data.dt * 1000),
+    pressure: response.data.main.pressure
   })
   }
   function searchWeather(event){

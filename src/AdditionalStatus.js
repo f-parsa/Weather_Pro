@@ -58,7 +58,7 @@ export default function AdditionalStatus(props) {
                 className="d-flex justify-content-center"
                 style={{ height: 10 + "%" }}
               >
-                <span id="pressureTag">1026</span>
+                <span id="pressureTag">{props.data.pressure}</span>
                 <span> &nbsp; PA</span>
               </div>
             </div>

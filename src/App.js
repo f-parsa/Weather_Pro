@@ -1,6 +1,6 @@
 import ToolBar from "./ToolBar";
 import "./styles.css";
-import "./Content";
+
 import CurrentWeather from "./CurrentWeather";
 import "./Footer";
 import Footer from "./Footer";

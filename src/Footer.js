@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div style={{ "text-align": "center" }}>
+    <div style={{ textAlign: "center" }}>
       <a
         href="https://github.com/f-parsa/WeatherProject"
         target="_blank"

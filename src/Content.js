@@ -5,8 +5,9 @@ import "./StylesCss.css";
 import CurrentWeather from "./CurrentWeather";
 
 export default function Content() {
+  
   return (
-    <div class="d-flex background p-2 border width justify-content-between">
+    <div className="d-flex background p-2 border width justify-content-between">
       <CurrentWeather />
       <AdditionalStatus />
     </div>

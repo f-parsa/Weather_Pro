@@ -1,16 +1,17 @@
 import ToolBar from "./ToolBar";
 import "./styles.css";
 import "./Content";
-import Content from "./Content";
+import CurrentWeather from "./CurrentWeather";
 import "./Footer";
 import Footer from "./Footer";
 
 export default function App() {
   return (
     <div className="App">
-      <div class="d-flex align-items-stretch height container">
+      <div className="d-flex align-items-stretch height container">
         <ToolBar />
-        <Content />
+        <CurrentWeather />
+
       </div>
       <Footer />
     </div>

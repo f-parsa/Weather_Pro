@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer";
 
-export default function AdditionalStatus() {
+export default function AdditionalStatus(props) {
   return (
     <div
       className="d-flex flex-column align-items-stretch justify-content-between"
@@ -14,7 +14,7 @@ export default function AdditionalStatus() {
               className="d-flex flex-column border m-1 p-2 statusFont justify-content-between align-items-stretch"
               style={{ height: 70 + "%" }}
             >
-              <div style={{ height: 10 + "%" }} class="mb-2">
+              <div style={{ height: 10 + "%" }} className="mb-2">
                 wind status
               </div>
               <div style={{ height: 80 + "%" }}>
@@ -24,7 +24,7 @@ export default function AdditionalStatus() {
                 className="d-flex justify-content-center"
                 style={{ height: 10 + "%" }}
               >
-                <span id="windSpeedTag">7.90 </span>
+                <span id="windSpeedTag">{props.data.wind} </span>
                 <span>&nbsp;km/h</span>
               </div>
             </div>
@@ -35,7 +35,7 @@ export default function AdditionalStatus() {
               <div className="d-flex flex-column justify-content-between">
                 <div>Humidity</div>
                 <div>
-                  <span id="humidityTag">84</span>
+                  <span id="humidityTag">{props.data.humidity}</span>
                   <span> &nbsp;%</span>
                 </div>
               </div>
@@ -69,7 +69,7 @@ export default function AdditionalStatus() {
               <div className="d-flex flex-column justify-content-between">
                 <div>Visibility</div>
                 <div>
-                  <span id="visibilityTag">03 </span>
+                  <span id="visibilityTag">{props.data.visibility/1000} </span>
                   <span>&nbsp;km</span>
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default function AdditionalStatus() {
               <div className="d-flex flex-column justify-content-between">
                 <div>Feels Like</div>
                 <div>
-                  <span id="feelslikeTag">42</span>
+                  <span id="feelslikeTag">{props.data.feelsLike}</span>
                   <span>°</span>
                 </div>
               </div>
@@ -115,8 +115,8 @@ export default function AdditionalStatus() {
           </div>
         </div>
       </div>
-      <div class="m-2 p-1">Weather Condition Map</div>
-      <div class="d-flex border m-2 p-1 w-99 h-50 blurPic" id="map"></div>
+      <div className="m-2 p-1">Weather Condition Map</div>
+      <div className="d-flex border m-2 p-1 w-99 h-50 blurPic" id="map"></div>
       <div>
         <script src="/src/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>

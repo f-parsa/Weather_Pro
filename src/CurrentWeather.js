@@ -1,16 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
 import "./StylesCss.css";
-import weatherIcon from "./images/weatherIcon.png";
+import axios from "axios";
+import AdditionalStatus from "./AdditionalStatus";
+
 import searchIcon from "./images/search.png";
 
 export default function CurrentWeather() {
-  let weatherData = {
-    temperature: 32,
-    description: "Sunny",
-    city: "Tehran",
-    currentDate: "Sunday 18:05"
-  };
+  
+  const [city, setCity] = useState("");
+  let [weatherData, setWeatherDAta] = useState({ready: false})
+  function searchChange(event){
+    setCity(event.target.value);
+
+  }
+  function handleCitySearch(response){
+    console.log(response)
+    setWeatherDAta({ready: true,
+    temperature: response.data.main.temp,
+    humidity: response.data.main.humidity,
+    description: response.data.weather[0].description,
+    icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+    wind: response.data.wind.speed,
+    visibility: response.data.visibility,
+    feelsLike: response.data.main.feels_like,
+    sunrise: response.data.sys.subrise,
+    sunset: response.data.sys.sunset,
+    currentDate: new Date(response.data.dt * 1000)
+  })
+  }
+  function searchWeather(event){
+    event.preventDefault();
+    let api_key ="70edadbf67937e8918129e60665f2802";
+    let url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}&units=metric`
+    axios.get(url).then(handleCitySearch);
+  }
   return (
+    <div className="d-flex background p-2 border width justify-content-between">
     <div
       className="d-flex flex-column align-items-stretch justify-content-between"
       style={{ width: 30 + "%" }}
@@ -19,14 +44,14 @@ export default function CurrentWeather() {
         <div className="d-flex m-1 p-1 justify-content-around">
           <div className="align-self-start">
             <img
-              src={weatherIcon}
+              src={weatherData.icon}
               alt="currentLogo"
               className="currentLogo mt-4 ms-3"
               id="weatherIcon"
             />
           </div>
           <div className="bold align-self-end position-relative">
-            <div id="temperatureTag">{weatherData.temperature}</div>
+            <div id="temperatureTag">{Math.round(weatherData.temperature)}</div>
             <span className="position-absolute top-0 start-100 thin translate-middle">
               <a href="/" id="celciusTag" className="m-1 active">
                 °C
@@ -42,24 +67,25 @@ export default function CurrentWeather() {
         </div>
         <hr />
         <div className="d-flex ms-2 textFont" id="cityTag">
-          {weatherData.city}
+          {city}
         </div>
         <div className="d-flex m-1 p-1 textFont" id="currentDateTime">
-          {weatherData.currentDate}
+          {/* {weatherData.currentDate} */}
         </div>
       </div>
-      <form action="" id="searchForm">
+      <form action="" id="searchForm" onSubmit={searchWeather}>
         <div className="border m-1 p-1 blurPic">
           <input
             type="text"
             placeholder="Search"
             id="searchText"
+            onChange={searchChange}
             style={{
               background: "transparent",
               border: "none",
               width: 90 + "%"
             }}
-            autocomplete="off"
+            autoComplete="off"
           />
           <input
             type="image"
@@ -75,6 +101,8 @@ export default function CurrentWeather() {
         className="d-flex blurPic flex-column m-2 p-1 border w-99 h-50 forecastFont"
         id="forecastTag"
       ></div>
+    </div>
+    <AdditionalStatus data={weatherData}/>
     </div>
   );
 }

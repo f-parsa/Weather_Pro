@@ -1,7 +1,12 @@
 import React from "react";
 import "./Footer";
+// import ChartWind from "./ChartWind";
+// import {Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale } from "chart.js";
+
+// Chart.register(Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale);
 
 export default function AdditionalStatus(props) {
+
   return (
     <div
       className="d-flex flex-column align-items-stretch justify-content-between"
@@ -20,6 +25,7 @@ export default function AdditionalStatus(props) {
               <div style={{ height: 80 + "%" }}>
                 <canvas id="windChart" className="canvasStyle"></canvas>
               </div>
+              {/* <ChartWind data={props.data} id={1}/> */}
               <div
                 className="d-flex justify-content-center"
                 style={{ height: 10 + "%" }}
@@ -107,7 +113,7 @@ export default function AdditionalStatus(props) {
               <div className="d-flex flex-column justify-content-between">
                 <div>Feels Like</div>
                 <div>
-                  <span id="feelslikeTag">{props.data.feelsLike}</span>
+                  <span id="feelslikeTag">{Math.round(props.data.feelsLike)}</span>
                   <span>°</span>
                 </div>
               </div>
@@ -119,7 +125,7 @@ export default function AdditionalStatus(props) {
       <div className="d-flex border m-2 p-1 w-99 h-50 blurPic" id="map"></div>
       <div>
         <script src="/src/script.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        
         <script
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuWt3h5qY2C0tk3ymHrUft4ED9UaaCgMo&callback=initMap&v=weekly"
           defer

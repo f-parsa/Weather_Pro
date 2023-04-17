@@ -2,13 +2,18 @@ import React, {useState} from "react";
 import "./StylesCss.css";
 import axios from "axios";
 import AdditionalStatus from "./AdditionalStatus";
-
 import searchIcon from "./images/search.png";
+import CityName from "./CityName";
+import FormatDate from "./FormatDate";
+import TempratureConvert from "./TempratureConvert";
 
 export default function CurrentWeather() {
   
   const [city, setCity] = useState("Tehran");
   let [weatherData, setWeatherDAta] = useState({ready: false})
+
+  
+  
   function searchChange(event){
     setCity(event.target.value);
 
@@ -27,11 +32,18 @@ export default function CurrentWeather() {
     sunrise: response.data.sys.subrise,
     sunset: response.data.sys.sunset,
     currentDate: new Date(response.data.dt * 1000),
-    pressure: response.data.main.pressure
+    pressure: response.data.main.pressure,
+    coords: response.data.coord,
+    city: response.data.name
+    
   })
+  
   }
-  function searchWeather(event){
-    // event.preventDefault();
+  function search(event){
+    event.preventDefault();
+    searchWeather();
+  }
+  function searchWeather(){
     let api_key ="70edadbf67937e8918129e60665f2802";
     let url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}&units=metric`
     axios.get(url).then(handleCitySearch);
@@ -55,7 +67,8 @@ export default function CurrentWeather() {
               id="weatherIcon"
             />
           </div>
-          <div className="bold align-self-end position-relative">
+          <TempratureConvert data={weatherData} />
+          {/* <div className="bold align-self-end position-relative">
             <div id="temperatureTag">{Math.round(weatherData.temperature)}</div>
             <span className="position-absolute top-0 start-100 thin translate-middle">
               <a href="/" id="celciusTag" className="m-1 active">
@@ -65,20 +78,19 @@ export default function CurrentWeather() {
                 °F
               </a>
             </span>
-          </div>
+          </div> */}
         </div>
         <div className="d-flex ms-2 textFont" id="descriptionTag">
           {weatherData.description}
         </div>
         <hr />
-        <div className="d-flex ms-2 textFont" id="cityTag">
-          {city}
-        </div>
-        <div className="d-flex m-1 p-1 textFont" id="currentDateTime">
-          {/* {weatherData.currentDate} */}
-        </div>
+        
+          <CityName cityName={weatherData} />
+          {/* {city} */}
+        
+        <FormatDate date={weatherData.currentDate} />
       </div>
-      <form action="" id="searchForm" onSubmit={searchWeather}>
+      <form action="" id="searchForm" onSubmit={search}>
         <div className="border m-1 p-1 blurPic">
           <input
             type="text"
@@ -113,6 +125,6 @@ export default function CurrentWeather() {
 }
 else{
   searchWeather();
-  return"Loading.."
+  return "Loading.."
 }
 }

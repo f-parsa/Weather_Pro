@@ -7,7 +7,7 @@ import searchIcon from "./images/search.png";
 
 export default function CurrentWeather() {
   
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Tehran");
   let [weatherData, setWeatherDAta] = useState({ready: false})
   function searchChange(event){
     setCity(event.target.value);
@@ -15,7 +15,8 @@ export default function CurrentWeather() {
   }
   function handleCitySearch(response){
     console.log(response)
-    setWeatherDAta({ready: true,
+    setWeatherDAta({
+    ready: true,
     temperature: response.data.main.temp,
     humidity: response.data.main.humidity,
     description: response.data.weather[0].description,
@@ -30,11 +31,14 @@ export default function CurrentWeather() {
   })
   }
   function searchWeather(event){
-    event.preventDefault();
+    // event.preventDefault();
     let api_key ="70edadbf67937e8918129e60665f2802";
     let url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}&units=metric`
     axios.get(url).then(handleCitySearch);
   }
+
+  if (weatherData.ready){
+
   return (
     <div className="d-flex background p-2 border width justify-content-between">
     <div
@@ -106,4 +110,9 @@ export default function CurrentWeather() {
     <AdditionalStatus data={weatherData}/>
     </div>
   );
+}
+else{
+  searchWeather();
+  return"Loading.."
+}
 }

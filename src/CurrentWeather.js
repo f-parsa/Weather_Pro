@@ -6,6 +6,7 @@ import searchIcon from "./images/search.png";
 import CityName from "./CityName";
 import FormatDate from "./FormatDate";
 import TempratureConvert from "./TempratureConvert";
+import ForecastData from "./ForecastData";
 
 export default function CurrentWeather() {
   
@@ -19,7 +20,7 @@ export default function CurrentWeather() {
 
   }
   function handleCitySearch(response){
-    console.log(response)
+    // console.log(response)
     setWeatherDAta({
     ready: true,
     temperature: response.data.main.temp,
@@ -117,7 +118,9 @@ export default function CurrentWeather() {
       <div
         className="d-flex blurPic flex-column m-2 p-1 border w-99 h-50 forecastFont"
         id="forecastTag"
-      ></div>
+      >
+        <ForecastData data={weatherData.coords}/>
+      </div>
     </div>
     <AdditionalStatus data={weatherData}/>
     </div>

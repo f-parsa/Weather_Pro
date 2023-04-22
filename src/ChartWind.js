@@ -56,7 +56,7 @@ export default function ChartWind(props){
     return (
         <div
         id="windChart"
-        style={{width: 100+"%", maxWidth: "200px", height: 100+"%"}}
+        style={{width: 100+"%", maxWidth: "150px", height: 100+"%"}}
       >
         <Line
           data={state}

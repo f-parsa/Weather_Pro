@@ -59,8 +59,8 @@ export default function UVChart(props){
     if(loadedUV){
     return (
         <div
-        id="windChart"
-        style={{width: 100+"%", maxWidth: "200px", height: 100+"%"}}
+        id="UVChart"
+        style={{width: 100+"%", maxWidth: "150px", height: 100+"%"}}
       >
         <Line
           data={state}

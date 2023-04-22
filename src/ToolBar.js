@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "./images/logo.png";
-import location from "./images/location.png";
+
 import "./StylesCss.css";
 
 export default function ToolBar() {
@@ -9,14 +9,14 @@ export default function ToolBar() {
       <div>
         <img src={logo} alt="logo" className="tollbarImage" />
       </div>
-      <div>
+      {/* <div>
         <img
           src={location}
           alt="location"
           className="mt-4 tollbarImage"
           id="locationTag"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

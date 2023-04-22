@@ -115,12 +115,9 @@ export default function CurrentWeather() {
           />
         </div>
       </form>
-      <div
-        className="d-flex blurPic flex-column m-2 p-1 border w-99 h-50 forecastFont"
-        id="forecastTag"
-      >
-        <ForecastData data={weatherData.coords}/>
-      </div>
+      
+        <ForecastData data={weatherData.coords} />
+      
     </div>
     <AdditionalStatus data={weatherData}/>
     </div>

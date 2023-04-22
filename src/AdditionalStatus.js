@@ -1,9 +1,12 @@
 import React from "react";
 import "./Footer";
-// import ChartWind from "./ChartWind";
-// import {Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale } from "chart.js";
+import ShowMap from "./ShowMap";
+import ChartWind from "./ChartWind";
+import { Chart, registerables} from 'chart.js';
+import UVChart from "./UVChart";
 
-// Chart.register(Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale);
+Chart.register(...registerables);
+
 
 export default function AdditionalStatus(props) {
 
@@ -22,10 +25,10 @@ export default function AdditionalStatus(props) {
               <div style={{ height: 10 + "%" }} className="mb-2">
                 wind status
               </div>
-              <div style={{ height: 80 + "%" }}>
+              {/* <div style={{ height: 80 + "%" }}>
                 <canvas id="windChart" className="canvasStyle"></canvas>
-              </div>
-              {/* <ChartWind data={props.data} id={1}/> */}
+              </div> */}
+              <ChartWind data={props.data.coords}/>
               <div
                 className="d-flex justify-content-center"
                 style={{ height: 10 + "%" }}
@@ -57,9 +60,10 @@ export default function AdditionalStatus(props) {
               <div style={{ height: 10 + "%" }} className="mb-2">
                 UV Index
               </div>
-              <div style={{ height: 80 + "%" }}>
+              {/* <div style={{ height: 80 + "%" }}>
                 <canvas id="uvChart" className="canvasStyle"></canvas>
-              </div>
+              </div> */}
+              <UVChart data={props.data.coords}/>
               <div
                 className="d-flex justify-content-center"
                 style={{ height: 10 + "%" }}
@@ -122,14 +126,13 @@ export default function AdditionalStatus(props) {
         </div>
       </div>
       <div className="m-2 p-1">Weather Condition Map</div>
-      <div className="d-flex border m-2 p-1 w-99 h-50 blurPic" id="map"></div>
+      {/* <div className="d-flex border m-2 p-1 w-99 h-50 blurPic" id="map"></div> */}
+
+      <ShowMap data={props.data.coords} />
       <div>
         <script src="/src/script.js"></script>
         
-        <script
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuWt3h5qY2C0tk3ymHrUft4ED9UaaCgMo&callback=initMap&v=weekly"
-          defer
-        ></script>
+        
       </div>
     </div>
   );

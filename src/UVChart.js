@@ -4,9 +4,10 @@ import axios from "axios";
 
 let state={};
 
-export default function ChartWind(props){
 
-    let [loadedWind, setloadedWind] = useState(false);
+export default function UVChart(props){
+
+    let [loadedUV, setloadedUV] = useState(false);
     function formatHour(data){
         let hours =[];
         for (let i=0; i<5; i++){
@@ -18,28 +19,31 @@ export default function ChartWind(props){
       
       }
       useEffect(() => {
-        setloadedWind(false);
+        setloadedUV(false);
       },[props.data]);
+      function formatDataChart(data)
+      {
+        let uvi=[];
+        for (let i=0; i<5; i++){
+            uvi[i] = data[i].uvi
+        }
+        return uvi;
+      }
     function handleChartData(response){
         // console.log(response);
-        setloadedWind(true);
+        setloadedUV(true);
     
         state = {
             labels: formatHour(response.data.hourly),
             datasets: [
               {
-                label: 'Wind Status',
+                label: 'UV Status',
                 fill: false,
                 lineTension: 0.5,
                 backgroundColor: 'rgba(75,192,192,1)',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: [response.data.hourly[0].wind_speed,
-                    response.data.hourly[1].wind_speed,
-                    response.data.hourly[2].wind_speed,
-                    response.data.hourly[3].wind_speed,
-                    response.data.hourly[4].wind_speed
-                    ]
+                data: formatDataChart(response.data.hourly)
               }
             ]
           }
@@ -52,7 +56,7 @@ export default function ChartWind(props){
         let url=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`
         axios.get(url).then(handleChartData)
     }
-    if(loadedWind){
+    if(loadedUV){
     return (
         <div
         id="windChart"

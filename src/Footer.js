@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div style={{ textAlign: "center" }}>
       <a
-        href="https://github.com/f-parsa/WeatherProject"
+        href="https://github.com/f-parsa/weather_pro"
         target="_blank"
         rel="noreferrer"
       >
